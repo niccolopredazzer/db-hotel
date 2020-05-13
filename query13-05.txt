@@ -31,3 +31,10 @@ INNER JOIN `ospiti`
 ON `ospiti`.`id` = `prenotazioni_has_ospiti`.`ospiti_id`
 GROUP BY `ospiti`.`name`
 HAVING COUNT `prenotazioni_has_ospiti`.`prenotazione_id`>2;
+
+●  Stampare tutti gli ospiti per ogni prenotazione
+SELECT `prenotazioni_has_ospiti`.`id` AS `id_prenotazione`, `ospiti`.`name`, `ospiti`.`lastname`
+FROM `ospiti`
+INNER JOIN `prenotazioni_has_ospiti`
+ON `ospiti`.`id` = `prenotazioni_has_ospiti`.`ospite_id`
+ORDER BY `id_prenotazione`;
