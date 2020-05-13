@@ -17,7 +17,17 @@ GROUP BY `orario`;
 
 
 ●  Quante prenotazioni ha fatto l’ospite che ha fatto più prenotazioni?
-SELECT COUNT(`prenotazione_id`) AS `num_prenotazioni` FROM `prenotazioni_has_ospiti`
+SELECT COUNT(`prenotazione_id`) AS `num_prenotazioni`
+FROM `prenotazioni_has_ospiti`
 GROUP BY `ospite_id`
 ORDER BY `num_prenotazioni` DESC
 LIMIT 1;
+
+
+●  Come si chiamano gli ospiti che hanno fatto più di due prenotazioni?
+SELECT `ospiti`.`name`, COUNT(`prenotazioni_has_ospiti`.`id`) AS `num_prenotazioni`
+FROM `prenotazioni_has_ospiti`
+INNER JOIN `ospiti`
+ON `ospiti`.`id` = `prenotazioni_has_ospiti`.`ospiti_id`
+GROUP BY `ospiti`.`name`
+HAVING COUNT `prenotazioni_has_ospiti`.`prenotazione_id`>2;
